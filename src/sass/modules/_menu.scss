@@ -1,0 +1,62 @@
+.menu {
+    list-style: none;
+    height: 100%;
+    margin: 0;
+
+    &-icon {
+        display: none;
+        float: right;
+        &-img {
+            height: 50px
+        }
+    }
+
+    &-container {
+        float: left;
+    }
+
+    &-item {
+        display: inline-block;
+        width: 100px;
+        height: 100%;
+        text-align: center;
+        float: left;
+
+        a {
+            width: 100%;
+            height: 100%;
+            display: inline-block;
+            text-decoration: none;
+            color: map-get($colors, "linkColor");
+            vertical-align: middle;
+            line-height: 50px;
+            background-color: map-get($colors, "linkBG");
+            &:hover {
+                background-color: darken(map-get($colors, "linkBG"), 20%);
+
+            }
+            
+            &.active {
+                background-color: darken(map-get($colors, "linkBG"), 20%);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: $smallDisplayWidth) {
+    .menu {
+        height: auto;
+        &-item {
+            display: block;
+            float: none;
+        }
+
+        &-icon {
+            display: block;
+        }
+
+        &-container {
+            display: none;
+        }
+    }
+}

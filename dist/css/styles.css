@@ -353,3 +353,136 @@ table {
 td,
 th {
   padding: 0; }
+
+ul {
+  padding: 0; }
+
+.content {
+  width: 100%; }
+  .content header {
+    width: 100%;
+    height: 50px;
+    background-color: #343C3F;
+    color: #F2F2F4;
+    position: fixed;
+    top: 0;
+    left: 0; }
+  .content .container {
+    width: 80%;
+    height: 100%;
+    margin: auto; }
+  .content .main-content {
+    margin-top: 70px; }
+
+.required {
+  color: #FF0000; }
+
+.btn {
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100px;
+  margin-right: 5px; }
+  .btn-default {
+    background-color: #C0C0C0; }
+    .btn-default:hover {
+      background-color: #a7a7a7; }
+  .btn-success {
+    background-color: #5cb85c; }
+    .btn-success:hover {
+      background-color: #449d44; }
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
+
+@media screen and (max-width: 700px) {
+  .content header {
+    height: auto; } }
+
+.menu {
+  list-style: none;
+  height: 100%;
+  margin: 0; }
+  .menu-icon {
+    display: none;
+    float: right; }
+    .menu-icon-img {
+      height: 50px; }
+  .menu-container {
+    float: left; }
+  .menu-item {
+    display: inline-block;
+    width: 100px;
+    height: 100%;
+    text-align: center;
+    float: left; }
+    .menu-item a {
+      width: 100%;
+      height: 100%;
+      display: inline-block;
+      text-decoration: none;
+      color: #FFFFFF;
+      vertical-align: middle;
+      line-height: 50px;
+      background-color: #555; }
+      .menu-item a:hover {
+        background-color: #222222; }
+      .menu-item a.active {
+        background-color: #222222; }
+
+@media screen and (max-width: 992px) {
+  .menu {
+    height: auto; }
+    .menu-item {
+      display: block;
+      float: none; }
+    .menu-icon {
+      display: block; }
+    .menu-container {
+      display: none; } }
+
+.table {
+  width: 100%;
+  margin: 20px;
+  text-align: left; }
+  .table-row {
+    border: 1px solid #CDCDCD; }
+  .table-row-head {
+    height: 50px;
+    background-color: #C0C0C0; }
+  .table-row-body {
+    height: 30px;
+    background-color: #DCDCDC; }
+    .table-row-body:hover {
+      background-color: #cfcfcf; }
+  .table-cell {
+    width: 20%;
+    padding: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap; }
+
+.form-fields {
+  display: inline-block;
+  width: 50%;
+  float: left;
+  margin-bottom: 5px; }
+  .form-fields-container {
+    margin: 10px; }
+
+.form .field-label {
+  display: block; }
+
+.form .form-field {
+  width: 350px; }
+
+.form-buttons-container {
+  margin: 10px; }
+
+@media screen and (max-width: 992px) {
+  .form-fields {
+    display: block;
+    width: 100%;
+    float: none; } }

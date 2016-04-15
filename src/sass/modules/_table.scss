@@ -1,0 +1,31 @@
+.table {
+    width: 100%;
+    margin: 20px;
+    text-align: left;
+
+    &-row {
+        border: 1px solid map-get($colors, "tableBorder");
+    }
+
+    &-row-head {
+        height: 50px;
+        background-color: map-get($colors, "tableHeadBG");
+    }
+
+    &-row-body {
+        height: 30px;
+        background-color: map-get($colors, "tableBodyBG");
+        
+        &:hover {
+            background-color: darken(map-get($colors, "tableBodyBG"), 5%);
+        }
+    }
+
+    &-cell {
+        width: 20%;
+        padding: 10px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+}
