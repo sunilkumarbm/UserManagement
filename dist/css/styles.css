@@ -374,6 +374,26 @@ ul {
   .content .main-content {
     margin-top: 70px; }
 
+.notify {
+  display: inline-block;
+  padding: 5px;
+  border-radius: 3px;
+  color: #FFFFFF;
+  position: absolute;
+  top: 70px;
+  right: 120px;
+  opacity: 0.7;
+  display: none; }
+  .notify-close {
+    cursor: pointer;
+    color: #666666; }
+  .notify-success {
+    background: #5cb85c;
+    border: 1px solid #2d672d; }
+  .notify-error {
+    background: #d9534f;
+    border: 1px solid #8b211e; }
+
 .required {
   color: #FF0000; }
 
