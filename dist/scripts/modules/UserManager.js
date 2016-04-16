@@ -34,6 +34,10 @@ define("UserManager", function (require, exports, module) {
         return storageOps.deactivateUser(userId);
     };
     
+    var activateUser = function (userId) {
+        return storageOps.activateUser(userId);
+    };
+    
     var getUserId = function () {
         var lastUserId = storageOps.getLastUserId();
         
@@ -85,6 +89,7 @@ define("UserManager", function (require, exports, module) {
     exports.getAllUsers = getAllUsers;
     exports.deleteUser = deleteUser;
     exports.deactivateUser = deactivateUser;
+    exports.activateUser = activateUser;
     exports.getUserId = getUserId;
     exports.validateUser = validateUser;
 });

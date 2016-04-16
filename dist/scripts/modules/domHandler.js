@@ -66,7 +66,13 @@ define("DomHandler", function (require, exports, module) {
         });
         document.getElementById("activateMenuItem").addEventListener("click", function () {
             contextMenu.close();
-            alert("Activated");
+            
+            if(!this.classList.contains("inactive")) {
+                activateUser(getUserFromContext());
+            }
+            else {
+                alert("User already active");
+            }
         });
     };
 
@@ -124,6 +130,20 @@ define("DomHandler", function (require, exports, module) {
             setUserStatus(userId, row, "Inactive");
             
             row.classList.add("inactive");
+        } else {
+
+        }
+    };
+    
+    var activateUser = function (userId) {
+        var status = UserManager.activateUser(userId);
+        
+        if (status) {
+            var row = document.getElementById("userId_" + userId);
+
+            setUserStatus(userId, row, "Active");
+            
+            row.classList.remove("inactive");
         } else {
 
         }

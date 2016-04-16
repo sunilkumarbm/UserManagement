@@ -47,11 +47,11 @@ define("StorageOps", function (require, exports, module) {
 
     var deleteUser = function (userId) {
         var users = getAllUsers();
-        
+
         var userFound = false;
-        for(var i = 0; i < users.length; i++) {
+        for (var i = 0; i < users.length; i++) {
             var user = users[i];
-            
+
             if (user.id === userId) {
                 users.splice(i, 1);
                 window.localStorage.setItem(database, JSON.stringify(users));
@@ -59,25 +59,34 @@ define("StorageOps", function (require, exports, module) {
                 break;
             }
         }
-        
+
         return userFound === true ? true : false;
     };
-    
+
     var deactivateUser = function (userId) {
+        return setUserStatus(userId, "Inactive");
+    };
+
+    var activateUser = function (userId) {
+        return setUserStatus(userId, "Active");
+
+    };
+
+    var setUserStatus = function (userId, status) {
         var users = getAllUsers();
-        
+
         var userFound = false;
-        for(var i = 0; i < users.length; i++) {
+        for (var i = 0; i < users.length; i++) {
             var user = users[i];
-            
+
             if (user.id === userId) {
-                users[i].status = "Inactive";
+                users[i].status = status;
                 window.localStorage.setItem(database, JSON.stringify(users));
                 userFound = true;
                 break;
             }
         }
-        
+
         return userFound === true ? true : false;
     };
 
@@ -87,4 +96,5 @@ define("StorageOps", function (require, exports, module) {
     exports.saveUser = saveUser;
     exports.deleteUser = deleteUser;
     exports.deactivateUser = deactivateUser;
+    exports.activateUser = activateUser;
 });
