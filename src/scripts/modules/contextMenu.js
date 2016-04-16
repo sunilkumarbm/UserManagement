@@ -2,6 +2,7 @@ define("ContextMenu", function (require, exports, module) {
     "use strict";
 
     var show = function (event, row) {
+        document.getElementById("contextMenu").setAttribute("data-userId", row.getAttribute("data-userId"));
         if(!row.classList.contains("inactive")) {
             document.getElementById("activateMenuItem").classList.add("inactive");
             document.getElementById("deactivateMenuItem").classList.remove("inactive");

@@ -628,6 +628,15 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 10px;
 }
 
+.form .invalid-field {
+  border: 1px solid red;
+}
+
+.form .invalid-text {
+  display: none;
+  color: red;
+}
+
 .form .field-label {
   display: block;
 }

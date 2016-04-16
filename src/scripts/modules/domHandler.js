@@ -8,6 +8,7 @@ define("DomHandler", function (require, exports, module) {
     var registerEventHandlers = function (pageType) {
         if (pageType === "view") {
             registerViewEvents();
+            registerContextMenuEvents();
             registerContextMenuForTable();
         } else if (pageType === "save") {
             registerSaveEvents();
@@ -15,23 +16,91 @@ define("DomHandler", function (require, exports, module) {
     };
 
     var registerSaveEvents = function () {
+        registerFormFieldEvents();
         document.getElementById("save").addEventListener("click", function (event) {
             event.preventDefault();
             var firstName = document.getElementById("firstName").value;
             var lastName = document.getElementById("lastName").value;
             var email = document.getElementById("email").value;
             var number = document.getElementById("number").value;
-            
+
             var status = UserManager.validateUser(firstName, lastName, email, number);
-            
+
             if (status.result === "success") {
                 var newUser = new User.User(firstName, lastName, email, number, "Active");
                 var createStatus = UserManager.createUser(newUser);
-            }
-            else {
+
+                goToHomePage(createStatus);
+            } else {
                 /* Invalid user details */
+                var invalidFields = status.fields;
+
+                for (var i = 0; i < invalidFields.length; i++) {
+                    showErrorField(invalidFields[i]);
+                }
             }
         });
+        
+        document.getElementById("firstName").focus();
+    };
+
+    var registerContextMenuEvents = function () {
+        document.getElementById("editMenuItem").addEventListener("click", function () {
+            contextMenu.close();
+
+            editUserPage(getUserFromContext());
+        });
+        document.getElementById("deleteMenuItem").addEventListener("click", function () {
+            contextMenu.close();
+            deleteUser(getUserFromContext());
+        });
+        document.getElementById("deactivateMenuItem").addEventListener("click", function () {
+            contextMenu.close();
+            alert("Deactivated");
+        });
+        document.getElementById("activateMenuItem").addEventListener("click", function () {
+            contextMenu.close();
+            alert("Activated");
+        });
+    };
+
+    var registerFormFieldEvents = function () {
+        var formFields = document.getElementsByClassName("form-field");
+
+        for (var i = 0; i < formFields.length; i++) {
+            formFields[i].addEventListener("change", function () {
+                hideErrorField(this.id);
+            });
+        }
+    };
+
+    var showErrorField = function (fieldId) {
+        document.getElementById(fieldId).classList.add("invalid-field");
+        document.getElementById(fieldId + "Error").style.display = "block";
+    };
+
+    var hideErrorField = function (fieldId) {
+        document.getElementById(fieldId).classList.remove("invalid-field");
+        document.getElementById(fieldId + "Error").style.display = "none";
+    };
+
+    var getUserFromContext = function () {
+        var userId = parseInt(document.getElementById("contextMenu").getAttribute("data-userId"));
+        return userId;
+    };
+
+    var deleteUser = function (userId) {
+        var status = UserManager.deleteUser(getUserFromContext());
+        if (status) {
+            var usersTable = document.getElementById("usersTable");
+            var tableBody = usersTable.getElementsByTagName("tbody")[0];
+
+            tableBody.removeChild(document.getElementById("userId_" + userId));
+            
+            if(tableBody.getElementsByTagName("tr").length === 0) {
+                createNoUserRow(tableBody);
+            }
+        }
     };
 
     var registerViewEvents = function () {
@@ -56,38 +125,43 @@ define("DomHandler", function (require, exports, module) {
         if (!event.ctrlKey && !event.shiftKey && !event.altKey) {
             if (event.keyCode === 27) {
                 contextMenu.close();
-            } else if (event.keyCode === 69) {
+            } else if (event.keyCode === 69) { //Edit
                 contextMenu.close();
-                alert("Item Edited");
-            } else if (event.keyCode === 82) {
+                document.getElementById("editMenuItem").click();
+            } else if (event.keyCode === 82) { //Delete
                 contextMenu.close();
-                alert("Item Removed");
-            } else if (event.keyCode === 68) {
+                document.getElementById("deleteMenuItem").click();
+            } else if (event.keyCode === 68) { //Deactivate
                 contextMenu.close();
-                alert("Item Deactivated");
-            } else if (event.keyCode === 65) {
+                document.getElementById("deactivateMenuItem").click();
+            } else if (event.keyCode === 65) { //Activate
                 contextMenu.close();
-                alert("Item activated");
+                document.getElementById("activateMenuItem").click();
+
             }
         }
     };
 
+    var createNoUserRow = function (tableBody) {
+        var noUserRow = tableBody.insertRow(0);
+        noUserRow.className = "table-row table-row-body";
+
+        var cell = noUserRow.insertCell(0);
+        cell.colSpan = 5;
+        cell.className = "table-cell";
+        cell.innerHTML = "No users found. <a href=\"save_user.html\">Click Here</a> to add.";
+    };
 
     var showUsers = function (users) {
         var usersTable = document.getElementById("usersTable");
         var tableBody = usersTable.getElementsByTagName("tbody")[0];
         if (users === null || users === undefined || users.length === 0) {
-            var noUserRow = tableBody.insertRow(0);
-            noUserRow.className = "table-row table-row-body";
-
-            var cell = noUserRow.insertCell(0);
-            cell.colSpan = 5;
-            cell.className = "table-cell";
-            cell.innerHTML = "No users found. <a href=\"save_user.html\">Click Here</a> to add";
+            createNoUserRow(tableBody);
         } else {
             if (users instanceof Array) {
                 for (var i = 0; i < users.length; i++) {
                     var row = tableBody.insertRow(i);
+                    row.id = "userId_" + users[i].id;
                     row.className = "table-row table-row-body";
                     row.setAttribute("data-userId", users[i].id);
 
@@ -127,6 +201,18 @@ define("DomHandler", function (require, exports, module) {
                 cell.innerHTML = "Your database might be corrupted.";
             }
         }
+    };
+
+    var goToHomePage = function () {
+        redirector("index.html");
+    };
+
+    var editUserPage = function (userId) {
+        redirector("save_user.html?userId=" + userId);
+    };
+
+    var redirector = function (url) {
+        window.location.href = url;
     };
 
     var registerContextMenuEventToRow = function (row) {

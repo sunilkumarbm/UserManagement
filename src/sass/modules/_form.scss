@@ -9,6 +9,16 @@
             margin: 10px;
         }
     }
+    .invalid {
+        &-field {
+            border: 1px solid red;
+        }
+        &-text {
+            display: none;
+            color: red;
+        }
+    }
+    
     .field-label {
         display: block;
     }

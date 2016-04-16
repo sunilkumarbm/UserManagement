@@ -7,10 +7,10 @@ define("UserManager", function (require, exports, module) {
     
     var createUser = function (user) {
         if(user instanceof User.User) {
-            storageOps.saveUser(user);
+            return storageOps.saveUser(user);
         }
         else {
-            
+            return false;
         }
     };
     
@@ -27,7 +27,7 @@ define("UserManager", function (require, exports, module) {
     };
     
     var deleteUser = function (userId) {
-        
+        return storageOps.deleteUser(userId);
     };
     
     var deactivateUser = function (userId) {
