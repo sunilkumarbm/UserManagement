@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>My Project</title>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+    </head>
+    <body>
+        <section class="content">
+            <header>
+                <nav class="container">
+                    <div class="menu-icon">
+                        <img class="menu-icon-img" alt="Menu Icon" src="assets/images/hamburger.png" />
+                    </div>
+                    <div class="menu-container">
+                        <ul class="menu">
+                            <li class="menu-item"><a href="index.html">Home</a></li>
+                            <li class="menu-item"><a class="active" href="save_user.html">Add User</a></li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+            <main class="container main-content">
+                <form class="form" name="userDetails">
+                    <div class="form-container">
+                        <div class="form-fields">
+                            <div class="form-fields-container">
+                                <label class="field-label" for="firstName">First Name <span class="required">*</span></label>
+                                <input class="form-field" type="text" id="firstName" required="required" />
+                            </div>
+                        </div>
+                        <div class="form-fields">
+                            <div class="form-fields-container">
+                                <label class="field-label" for="lastName">Last Name <span class="required">*</span></label>
+                                <input class="form-field" type="text" id="lastName" required="required" />
+                            </div>
+                        </div>
+                        <div class="form-fields">
+                            <div class="form-fields-container">
+                                <label class="field-label" for="email">Email <span class="required">*</span></label>
+                                <input class="form-field" type="email" id="email" required="required" />
+                            </div>
+                        </div>
+                        <div class="form-fields">
+                            <div class="form-fields-container">
+                                <label class="field-label" for="number">Phone Number <span class="required">*</span></label>
+                                <input class="form-field" type="number" min="1111111111" max="9999999999" id="number" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-buttons-container">
+                        <button class="btn btn-success">Save</button>
+                        <button class="btn btn-default">Cancel</button>
+                    </div>
+                </form>
+            </main>
+        </section>
+    </body>
+</html>

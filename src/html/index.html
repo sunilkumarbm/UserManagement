@@ -14,7 +14,7 @@
                     <div class="menu-container">
                         <ul class="menu">
                             <li class="menu-item"><a class="active" href="index.html">Home</a></li>
-                            <li class="menu-item"><a href="add_user.html">Add User</a></li>
+                            <li class="menu-item"><a href="save_user.html">Add User</a></li>
                         </ul>
                     </div>
                 </nav>
@@ -83,16 +83,18 @@
             <label class="notify-message">User saved successfully</label>
             <span class="notify-close">x</span>
         </div>
-        <ul class="context-menu">
+        <ul class="context-menu" id="contextMenu">
             <li class="context-menu-item">
-                <label data-id="view" id="viewMenuItem" onclick="viewRow(this)">View</label>
+                <label data-id="view" id="editMenuItem">Edit</label>
             </li>
             <li class="context-menu-item">
-                <label data-id="delete" id="deleteMenuItem" onclick="deleteRow(this)">Delete</label>
+                <label data-id="delete" id="deleteMenuItem" onclick="deleteRow(this)">Remove</label>
             </li>
             <li class="context-menu-item">
                 <label data-id="deactivate" id="deactivateMenuItem" onclick="deactivateRow(this)">Deactivate</label>
             </li>
         </ul>
+        <script type="text/javascript" data-main="scripts/view" src="scripts/vendor/require.js">
+        </script>
     </body>
 </html>

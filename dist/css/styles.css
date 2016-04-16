@@ -571,6 +571,10 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: #DCDCDC;
 }
 
+.table-row-body.inactive {
+  color: grey;
+}
+
 .table-row-body:hover {
   background-color: #cfcfcf;
 }
@@ -607,6 +611,10 @@ input[type=number]::-webkit-outer-spin-button {
 .context-menu-item:hover {
   background-color: #d7d7d7;
   border: 1px solid #d1e2e0;
+}
+
+.context-menu-item:first-letter {
+  text-decoration: underline;
 }
 
 .form-fields {

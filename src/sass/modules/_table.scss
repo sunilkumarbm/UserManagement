@@ -16,6 +16,10 @@
         height: 30px;
         background-color: map-get($colors, "tableBodyBG");
         
+        &.inactive {
+            color: grey;
+        }
+        
         &:hover {
             background-color: darken(map-get($colors, "tableBodyBG"), 5%);
         }

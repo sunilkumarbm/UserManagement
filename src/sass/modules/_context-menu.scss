@@ -21,5 +21,8 @@
             background-color: darken(map-get($colors, "contextMenuBG"), 10%);
             border: 1px solid #d1e2e0;
         }
+        &:first-letter {
+            text-decoration: underline;
+        }
     }
 }
