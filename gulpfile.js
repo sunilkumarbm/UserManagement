@@ -5,15 +5,15 @@ var gulp = require("gulp"),
 //    minifyCss = require('gulp-minify-css');
 
 
-//var sassOptions = {
-//  errLogToConsole: true,
-//  outputStyle: 'expanded'
-//};
+var sassOptions = {
+  errLogToConsole: true,
+  outputStyle: 'expanded'
+};
 // Create gulp task
 // Complie the SASS file
 gulp.task("sass", function(){
 	gulp.src("src/sass/*.scss")
-		.pipe(sass().on("error",sass.logError ))
+		.pipe(sass(sassOptions).on("error",sass.logError ))
 //                .pipe(minifyCss())
 		.pipe(gulp.dest("dist/css"));
 	;
