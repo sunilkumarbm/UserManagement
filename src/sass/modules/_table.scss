@@ -14,11 +14,7 @@
 
     &-row-body {
         height: 30px;
-        background-color: map-get($colors, "tableBodyBG");
-        
-        &.inactive {
-            color: grey;
-        }
+        background-color: map-get($colors, "tableBodyBG");        
         
         &:hover {
             background-color: darken(map-get($colors, "tableBodyBG"), 5%);

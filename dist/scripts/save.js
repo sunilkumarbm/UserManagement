@@ -12,8 +12,5 @@ require.config({
 });
 
 require(["DomHandler", "UserManager"], function (DomHandler, UserManager) {
-    DomHandler.registerEventHandlers("view");
-    
-    var users = UserManager.getAllUsers();
-    DomHandler.showUsers(users);
+    DomHandler.registerEventHandlers("save");
 });

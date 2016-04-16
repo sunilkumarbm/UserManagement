@@ -20,7 +20,7 @@
                 </nav>
             </header>
             <main class="container main-content">
-                <table class="table">
+                <table class="table" id="usersTable">
                     <thead class="table-head">
                         <tr class="table-row table-row-head">
                             <th class="table-cell">
@@ -41,7 +41,7 @@
                         </tr>
                     </thead>
                     <tbody class="table-content">
-                        <tr class="table-row table-row-body">
+<!--                        <tr class="table-row table-row-body">
                             <td class="table-cell">
                                 Sunil
                             </td>
@@ -74,7 +74,7 @@
                             <td class="table-cell">
                                 Active
                             </td>
-                        </tr>
+                        </tr>-->
                     </tbody>
                 </table>
             </main>
@@ -88,10 +88,13 @@
                 <label data-id="view" id="editMenuItem">Edit</label>
             </li>
             <li class="context-menu-item">
-                <label data-id="delete" id="deleteMenuItem" onclick="deleteRow(this)">Remove</label>
+                <label data-id="delete" id="deleteMenuItem">Remove</label>
             </li>
             <li class="context-menu-item">
-                <label data-id="deactivate" id="deactivateMenuItem" onclick="deactivateRow(this)">Deactivate</label>
+                <label data-id="deactivate" id="deactivateMenuItem">Deactivate</label>
+            </li>
+            <li class="context-menu-item">
+                <label data-id="activate" id="activateMenuItem">Activate</label>
             </li>
         </ul>
         <script type="text/javascript" data-main="scripts/view" src="scripts/vendor/require.js">
