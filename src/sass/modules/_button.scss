@@ -1,0 +1,21 @@
+.btn {
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    width: 100px;
+    margin-right: 5px;
+
+    &-default {
+        background-color: map-get($colors, "buttonDefaultBG");
+        &:hover {
+            background-color: darken(map-get($colors, "buttonDefaultBG"), 10%);
+        }
+    }
+
+    &-success {
+        background-color: map-get($colors, "successBG");
+        &:hover {
+            background-color: darken(map-get($colors, "successBG"), 10%);
+        }
+    }
+}

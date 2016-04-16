@@ -83,10 +83,16 @@
             <label class="notify-message">User saved successfully</label>
             <span class="notify-close">x</span>
         </div>
-        <div class="context-menu">
-            <label data-id="view" id="viewMenuItem" class="context-menu-item" onclick="viewRow(this)">View</label>
-            <label data-id="delete" id="deleteMenuItem" class="context-menu-item" onclick="deleteRow(this)">Delete</label>
-            <label data-id="deactivate" id="deactivateMenuItem" class="context-menu-item" onclick="deleteRow(this)">Deactivate</label>
-        </div>
+        <ul class="context-menu">
+            <li class="context-menu-item">
+                <label data-id="view" id="viewMenuItem" onclick="viewRow(this)">View</label>
+            </li>
+            <li class="context-menu-item">
+                <label data-id="delete" id="deleteMenuItem" onclick="deleteRow(this)">Delete</label>
+            </li>
+            <li class="context-menu-item">
+                <label data-id="deactivate" id="deactivateMenuItem" onclick="deactivateRow(this)">Deactivate</label>
+            </li>
+        </ul>
     </body>
 </html>

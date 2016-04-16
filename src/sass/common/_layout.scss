@@ -19,57 +19,9 @@
     .main-content {
         margin-top: 70px;
     }
-}
 
-.notify {
-    display: inline-block;
-    padding: 5px;
-    border-radius: 3px;
-    color: map-get($colors, "primaryBG");
-    position: absolute;
-    top: 70px;
-    right: 120px;
-    opacity: 0.7;
-    display: none;
-    
-    &-close {
-        cursor: pointer;
-        color: #666666;
-    }
-    
-    &-success {
-        background: map-get($colors, "successBG");
-        border: 1px solid darken(map-get($colors, "successBG"), 25%);
-    }
-    &-error {
-        background: map-get($colors, "errorBG");
-        border: 1px solid darken(map-get($colors, "errorBG"), 25%);
-    }
-}
-
-.required {
-    color: map-get($colors, "required");
-}
-
-.btn {
-    border: none;
-    padding: 10px;
-    border-radius: 5px;
-    width: 100px;
-    margin-right: 5px;
-    
-    &-default {
-        background-color: map-get($colors, "buttonDefaultBG");
-        &:hover {
-            background-color: darken(map-get($colors, "buttonDefaultBG"), 10%);
-        }
-    }
-    
-    &-success {
-        background-color: map-get($colors, "successBG");
-        &:hover {
-            background-color: darken(map-get($colors, "successBG"), 10%);
-        }
+    .required {
+        color: map-get($colors, "required");
     }
 }
 

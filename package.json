@@ -13,6 +13,7 @@
     "gulp": "^3.9.0"
   },
   "dependencies": {
-    "bower": "^1.7.9"
+    "bower": "^1.7.9",
+    "bower-requirejs": "^1.2.0"
   }
 }
