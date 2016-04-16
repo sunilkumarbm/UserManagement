@@ -31,7 +31,7 @@ define("UserManager", function (require, exports, module) {
     };
     
     var deactivateUser = function (userId) {
-        
+        return storageOps.deactivateUser(userId);
     };
     
     var getUserId = function () {

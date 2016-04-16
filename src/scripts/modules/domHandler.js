@@ -40,7 +40,7 @@ define("DomHandler", function (require, exports, module) {
                 }
             }
         });
-        
+
         document.getElementById("firstName").focus();
     };
 
@@ -56,7 +56,13 @@ define("DomHandler", function (require, exports, module) {
         });
         document.getElementById("deactivateMenuItem").addEventListener("click", function () {
             contextMenu.close();
-            alert("Deactivated");
+            
+            if(!this.classList.contains("inactive")) {
+                deactivateUser(getUserFromContext());
+            }
+            else {
+                alert("User already inactive");
+            }
         });
         document.getElementById("activateMenuItem").addEventListener("click", function () {
             contextMenu.close();
@@ -92,15 +98,39 @@ define("DomHandler", function (require, exports, module) {
     var deleteUser = function (userId) {
         var status = UserManager.deleteUser(getUserFromContext());
         if (status) {
-            var usersTable = document.getElementById("usersTable");
-            var tableBody = usersTable.getElementsByTagName("tbody")[0];
+            var tableBody = getUsersTableBody();
 
             tableBody.removeChild(document.getElementById("userId_" + userId));
-            
-            if(tableBody.getElementsByTagName("tr").length === 0) {
+
+            if (tableBody.getElementsByTagName("tr").length === 0) {
                 createNoUserRow(tableBody);
             }
         }
+    };
+
+    var getUsersTableBody = function () {
+        var usersTable = document.getElementById("usersTable");
+        var tableBody = usersTable.getElementsByTagName("tbody")[0];
+
+        return tableBody;
+    };
+
+    var deactivateUser = function (userId) {
+        var status = UserManager.deactivateUser(userId);
+
+        if (status) {
+            var row = document.getElementById("userId_" + userId);
+
+            setUserStatus(userId, row, "Inactive");
+            
+            row.classList.add("inactive");
+        } else {
+
+        }
+    };
+
+    var setUserStatus = function (userId, row, status) {
+        row.cells[4].innerHTML = status;
     };
 
     var registerViewEvents = function () {
@@ -153,8 +183,7 @@ define("DomHandler", function (require, exports, module) {
     };
 
     var showUsers = function (users) {
-        var usersTable = document.getElementById("usersTable");
-        var tableBody = usersTable.getElementsByTagName("tbody")[0];
+        var tableBody = getUsersTableBody();
         if (users === null || users === undefined || users.length === 0) {
             createNoUserRow(tableBody);
         } else {
@@ -185,7 +214,7 @@ define("DomHandler", function (require, exports, module) {
                     statusCell.className = "table-cell";
                     statusCell.innerHTML = users[i].status;
 
-                    if (users[i].status === "In Active") {
+                    if (users[i].status === "Inactive") {
                         row.className += " inactive";
                     }
 

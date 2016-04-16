@@ -62,10 +62,29 @@ define("StorageOps", function (require, exports, module) {
         
         return userFound === true ? true : false;
     };
+    
+    var deactivateUser = function (userId) {
+        var users = getAllUsers();
+        
+        var userFound = false;
+        for(var i = 0; i < users.length; i++) {
+            var user = users[i];
+            
+            if (user.id === userId) {
+                users[i].status = "Inactive";
+                window.localStorage.setItem(database, JSON.stringify(users));
+                userFound = true;
+                break;
+            }
+        }
+        
+        return userFound === true ? true : false;
+    };
 
     exports.getLastUserId = getLastUserId;
     exports.setLastUserId = setLastUserId;
     exports.getAllUsers = getAllUsers;
     exports.saveUser = saveUser;
     exports.deleteUser = deleteUser;
+    exports.deactivateUser = deactivateUser;
 });
