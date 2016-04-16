@@ -14,12 +14,12 @@ define("UserManager", function (require, exports, module) {
         }
     };
     
-    var editUser = function (userId, newUser) {
-        
+    var editUser = function (editedUser) {
+        return storageOps.editUser(editedUser);
     };
     
     var getUser = function (userId) {
-        
+        return storageOps.getUser(userId);
     };
     
     var getAllUsers = function () {

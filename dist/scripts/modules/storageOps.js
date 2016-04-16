@@ -39,6 +39,39 @@ define("StorageOps", function (require, exports, module) {
         return true;
     };
 
+    var editUser = function (editedUser) {
+        var userId = editedUser.id;
+
+        var users = getAllUsers();
+
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].id === userId) {
+                users[i].firstName = editedUser.firstName;
+                users[i].lastName = editedUser.lastName;
+                users[i].email = editedUser.email;
+                users[i].phone = editedUser.phone;
+                
+                break;
+            }
+        }
+        
+        window.localStorage.setItem(database, JSON.stringify(users));
+    };
+
+    var getUser = function (userId) {
+        var users = getAllUsers();
+        var user = null;
+
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].id === userId) {
+                user = users[i];
+                break;
+            }
+        }
+
+        return user;
+    };
+
     var getAllUsers = function () {
         var userList = window.localStorage.getItem(database);
 
@@ -92,8 +125,10 @@ define("StorageOps", function (require, exports, module) {
 
     exports.getLastUserId = getLastUserId;
     exports.setLastUserId = setLastUserId;
+    exports.getUser = getUser;
     exports.getAllUsers = getAllUsers;
     exports.saveUser = saveUser;
+    exports.editUser = editUser;
     exports.deleteUser = deleteUser;
     exports.deactivateUser = deactivateUser;
     exports.activateUser = activateUser;

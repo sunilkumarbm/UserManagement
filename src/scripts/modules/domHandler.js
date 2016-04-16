@@ -4,6 +4,7 @@ define("DomHandler", function (require, exports, module) {
     var contextMenu = require('ContextMenu');
     var UserManager = require('UserManager');
     var User = require('User');
+    var QueryParser = require("QueryParser");
 
     var registerEventHandlers = function (pageType) {
         if (pageType === "view") {
@@ -27,10 +28,18 @@ define("DomHandler", function (require, exports, module) {
             var status = UserManager.validateUser(firstName, lastName, email, number);
 
             if (status.result === "success") {
-                var newUser = new User.User(firstName, lastName, email, number, "Active");
-                var createStatus = UserManager.createUser(newUser);
+                var saveStatus;
+                if (this.getAttribute("data-action") === "create") {
+                    var newUser = new User.User(firstName, lastName, email, number, "Active");
+                    saveStatus = UserManager.createUser(newUser);
+                } else if (this.getAttribute("data-action") === "edit"){
+                    var userId = parseInt(this.getAttribute("data-userId"));
+                    
+                    var editedUser = new User.User(firstName, lastName, email, number, "Active", userId);
+                    saveStatus = UserManager.editUser(editedUser);
+                }
 
-                goToHomePage(createStatus);
+                goToHomePage(saveStatus);
             } else {
                 /* Invalid user details */
                 var invalidFields = status.fields;
@@ -41,7 +50,40 @@ define("DomHandler", function (require, exports, module) {
             }
         });
 
+        checkEdit();
         document.getElementById("firstName").focus();
+    };
+
+    var checkEdit = function () {
+        var status = QueryParser.getUrlParameters(window.location.href);
+
+        if (status.result === "error") {
+//            alert("User not specified");
+//            window.location.href = "index.html";
+        } else {
+            var params = status.queryParams;
+
+            var userId = parseInt(params.userId);
+            var user = UserManager.getUser(userId);
+
+            if (user === null) {
+                alert("Invalid user");
+            } else {
+//                alert(JSON.stringify(user));
+                var firstName = user.firstName;
+                var lastName = user.lastName;
+                var email = user.email;
+                var number = user.phone;
+
+                document.getElementById("firstName").value = firstName;
+                document.getElementById("lastName").value = lastName;
+                document.getElementById("email").value = email;
+                document.getElementById("number").value = number;
+
+                document.getElementById("save").setAttribute("data-action", "edit");
+                document.getElementById("save").setAttribute("data-userId", userId);
+            }
+        }
     };
 
     var registerContextMenuEvents = function () {
@@ -56,21 +98,19 @@ define("DomHandler", function (require, exports, module) {
         });
         document.getElementById("deactivateMenuItem").addEventListener("click", function () {
             contextMenu.close();
-            
-            if(!this.classList.contains("inactive")) {
+
+            if (!this.classList.contains("inactive")) {
                 deactivateUser(getUserFromContext());
-            }
-            else {
+            } else {
                 alert("User already inactive");
             }
         });
         document.getElementById("activateMenuItem").addEventListener("click", function () {
             contextMenu.close();
-            
-            if(!this.classList.contains("inactive")) {
+
+            if (!this.classList.contains("inactive")) {
                 activateUser(getUserFromContext());
-            }
-            else {
+            } else {
                 alert("User already active");
             }
         });
@@ -128,21 +168,21 @@ define("DomHandler", function (require, exports, module) {
             var row = document.getElementById("userId_" + userId);
 
             setUserStatus(userId, row, "Inactive");
-            
+
             row.classList.add("inactive");
         } else {
 
         }
     };
-    
+
     var activateUser = function (userId) {
         var status = UserManager.activateUser(userId);
-        
+
         if (status) {
             var row = document.getElementById("userId_" + userId);
 
             setUserStatus(userId, row, "Active");
-            
+
             row.classList.remove("inactive");
         } else {
 

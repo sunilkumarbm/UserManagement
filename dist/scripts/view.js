@@ -7,7 +7,8 @@ require.config({
         StorageOps: "modules/storageOps",
         NameValidator: "modules/NameValidator",
         NumberValidator: "modules/NumberValidator",
-        EmailValidator: "modules/EmailValidator"
+        EmailValidator: "modules/EmailValidator",
+        QueryParser: "modules/QueryParser"
     }
 });
 
