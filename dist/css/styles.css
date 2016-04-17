@@ -541,7 +541,7 @@ input[type=number]::-webkit-outer-spin-button {
   border-radius: 3px;
   color: #FFFFFF;
   position: absolute;
-  top: 70px;
+  top: 10px;
   right: 120px;
   opacity: 0.9;
   display: none;
@@ -567,6 +567,7 @@ input[type=number]::-webkit-outer-spin-button {
   width: 100%;
   margin: 20px;
   text-align: left;
+  max-width: 1000px;
 }
 
 .table-row {
@@ -584,8 +585,12 @@ input[type=number]::-webkit-outer-spin-button {
   background-color: #DCDCDC;
 }
 
-.table-row-body:hover {
+.table-row-body:nth-child(even) {
   background-color: #cfcfcf;
+}
+
+.table-row-body:hover {
+  background-color: #c8c8c8;
 }
 
 .table-cell {
@@ -595,6 +600,8 @@ input[type=number]::-webkit-outer-spin-button {
   text-overflow: ellipsis;
   white-space: nowrap;
   text-align: left;
+  word-wrap: break-word;
+  word-break: break-all;
 }
 
 .context-menu {
@@ -662,6 +669,7 @@ input[type=number]::-webkit-outer-spin-button {
 
 .form-buttons-container {
   margin: 10px;
+  clear: both;
 }
 
 @media screen and (max-width: 992px) {

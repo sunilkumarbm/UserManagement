@@ -2,6 +2,7 @@
     width: 100%;
     margin: 20px;
     text-align: left;
+    max-width: 1000px;
 
     &-row {
         border: 1px solid map-get($colors, "tableBorder");
@@ -15,10 +16,14 @@
 
     &-row-body {
         height: 30px;
-        background-color: map-get($colors, "tableBodyBG");        
+        background-color: map-get($colors, "tableBodyBG");
+        
+        &:nth-child(even) {
+            background-color: darken(map-get($colors, "tableBodyBG"), 5%);;
+        }
         
         &:hover {
-            background-color: darken(map-get($colors, "tableBodyBG"), 5%);
+            background-color: darken(map-get($colors, "tableBodyBG"), 8%);
         }
     }
 
@@ -29,5 +34,7 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         text-align: left;
+        word-wrap: break-word;
+        word-break: break-all;
     }
 }

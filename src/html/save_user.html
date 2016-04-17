@@ -26,28 +26,28 @@
                             <div class="form-fields-container">
                                 <label class="field-label" for="firstName">First Name <span class="required">*</span></label>
                                 <input class="form-field" type="text" id="firstName" required="required" />
-                                <label class="invalid-text" id="firstNameError">Invalid first name</label>
+                                <label class="invalid-text" id="firstNameError">Name should contain only</label>
                             </div>
                         </div>
                         <div class="form-fields">
                             <div class="form-fields-container">
                                 <label class="field-label" for="lastName">Last Name <span class="required">*</span></label>
                                 <input class="form-field" type="text" id="lastName" required="required" />
-                                <label class="invalid-text" id="lastNameError">Invalid last name</label>
+                                <label class="invalid-text" id="lastNameError">Name should contain only</label>
                             </div>
                         </div>
                         <div class="form-fields">
                             <div class="form-fields-container">
                                 <label class="field-label" for="email">Email <span class="required">*</span></label>
                                 <input class="form-field" type="email" id="email" required="required" />
-                                <label class="invalid-text" id="emailError">Invalid email address</label>
+                                <label class="invalid-text" id="emailError">Please enter a valid email (E.g.: john.doe@example.com)</label>
                             </div>
                         </div>
                         <div class="form-fields">
                             <div class="form-fields-container">
                                 <label class="field-label" for="number">Phone Number <span class="required">*</span></label>
-                                <input class="form-field" type="number" min="1111111111" max="9999999999" id="number" />
-                                <label class="invalid-text" id="numberError">Invalid phone number</label>
+                                <input class="form-field" type="text" id="number" maxlength="10" />
+                                <label class="invalid-text" id="numberError">Please enter a valid phone number (E.g.: 9032050615)</label>
                             </div>
                         </div>
                     </div>

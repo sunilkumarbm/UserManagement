@@ -1,4 +1,5 @@
 define("NavbarHandler", function (require, exports, module) {
+    'use strict';
     var navBar = document.getElementsByClassName("menu-container")[0];
     
     var show = function () {

@@ -27,12 +27,14 @@ define("ContextMenu", function (require, exports, module) {
         contextMenu.style.top = event.pageY + "px";
         contextMenu.style.left = event.pageX + "px";
         contextMenu.style.display = "inline-block";
+        contextMenu.setAttribute("aria-hidden", "false");
         
         editMenu.focus();
     };
 
     var close = function () {
         contextMenu.style.display = "none";
+        contextMenu.setAttribute("aria-hidden", "true");
     };
     
     exports.show = show;

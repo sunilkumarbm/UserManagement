@@ -97,7 +97,7 @@ define("DomHandler", function (require, exports, module) {
                 Notifier.show(message, status);
                 setTimeout(function () {
                     Notifier.hide();
-                }, 2000);
+                }, 3000);
             }
         }
     };
@@ -253,7 +253,7 @@ define("DomHandler", function (require, exports, module) {
 
                 setTimeout(function () {
                     Notifier.hide();
-                }, 2000);
+                }, 3000);
             }
         }
     };
@@ -279,7 +279,7 @@ define("DomHandler", function (require, exports, module) {
 
             setTimeout(function () {
                 Notifier.hide();
-            }, 2000);
+            }, 3000);
         } else {
 
         }
@@ -299,7 +299,7 @@ define("DomHandler", function (require, exports, module) {
 
             setTimeout(function () {
                 Notifier.hide();
-            }, 2000);
+            }, 3000);
         } else {
 
         }

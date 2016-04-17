@@ -1,4 +1,5 @@
 define("QueryParser", function(require, exports, module) {
+    'use strict';
     var getUrlParameters = function (url) {
         var status = {};
         var urlSplit = url.split("?");

@@ -21,6 +21,7 @@ define(function (require, exports, module) {
         notificationLabel.innerHTML = message;
 
         notificationBar.style.display = "inline-block";
+        notificationBar.setAttribute("aria-hidden", "false");
 
         if (type.toLowerCase() === MESSAGE_TYPE_SUCCESS) {
             notificationBar.classList.add("notify-success");
@@ -31,6 +32,7 @@ define(function (require, exports, module) {
 
     var hide = function () {
         notificationBar.style.display = "none";
+        notificationBar.setAttribute("aria-hidden", "true");
     };
 
     exports.show = show;

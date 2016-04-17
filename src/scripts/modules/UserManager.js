@@ -1,4 +1,5 @@
 define("UserManager", function (require, exports, module) {
+    'use strict';
     var storageOps = require("StorageOps");
     var User = require("User");
     var NameValidator = require("NameValidator");

@@ -21,21 +21,22 @@
             </header>
             <main class="container main-content">
                 <table class="table sortable" id="usersTable">
+                    <caption>List of users</caption>
                     <thead class="table-head">
                         <tr class="table-row table-row-head">
-                            <th class="table-cell">
+                            <th class="table-cell" scope="col">
                                 First Name
                             </th>
-                            <th class="table-cell">
+                            <th class="table-cell" scope="col">
                                 Last Name
                             </th>
-                            <th class="table-cell">
+                            <th class="table-cell" scope="col">
                                 Email
                             </th>
-                            <th class="table-cell">
+                            <th class="table-cell" scope="col">
                                 Mobile
                             </th>
-                            <th class="table-cell">
+                            <th class="table-cell" scope="col">
                                 Status
                             </th>
                         </tr>
@@ -45,22 +46,22 @@
                 </table>
             </main>
         </section>
-        <div class="notify">
+        <div class="notify" aria-hidden="true">
             <label id="notification" class="notify-message"></label>
-            <span class="notify-close">x</span>
+            <span class="notify-close" role="button">x</span>
         </div>
-        <ul class="context-menu" id="contextMenu">
-            <li class="context-menu-item">
-                <label tabindex="1" data-id="view" id="editMenuItem">Edit</label>
+        <ul class="context-menu" id="contextMenu" role="menu" aria-hidden="true">
+            <li class="context-menu-item" role="menuitem">
+                <label aria-kbdshortcuts="V" tabindex="1" data-id="view" id="editMenuItem">Edit</label>
             </li>
-            <li class="context-menu-item">
-                <label tabindex="2" data-id="delete" id="deleteMenuItem">Remove</label>
+            <li class="context-menu-item" role="menuitem">
+                <label aria-kbdshortcuts="D" tabindex="2" data-id="delete" id="deleteMenuItem">Remove</label>
             </li>
-            <li class="context-menu-item">
-                <label tabindex="3" data-id="deactivate" id="deactivateMenuItem">Deactivate</label>
+            <li class="context-menu-item" role="menuitem">
+                <label aria-kbdshortcuts="D" tabindex="3" data-id="deactivate" id="deactivateMenuItem">Deactivate</label>
             </li>
-            <li class="context-menu-item">
-                <label data-id="activate" id="activateMenuItem">Activate</label>
+            <li class="context-menu-item" role="menuitem">
+                <label aria-kbdshortcuts="A" data-id="activate" id="activateMenuItem">Activate</label>
             </li>
         </ul>
         <script type="text/javascript" data-main="scripts/view" src="scripts/vendor/require.js">
