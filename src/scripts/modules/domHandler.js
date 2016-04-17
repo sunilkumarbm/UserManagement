@@ -142,8 +142,8 @@ define("DomHandler", function (require, exports, module) {
         editMenuItem.addEventListener("keydown", function (event) {
             keyBoardEventHandler(event, editUserEvent);
         });
-        
-        
+
+
         var deleteMenuItem = document.getElementById("deleteMenuItem");
         deleteMenuItem.addEventListener("click", function () {
             deleteUserEvent();
@@ -151,25 +151,15 @@ define("DomHandler", function (require, exports, module) {
         deleteMenuItem.addEventListener("keydown", function (event) {
             keyBoardEventHandler(event, deleteUserEvent);
         });
-        
-        
-        var deactivateMenuItem = document.getElementById("deactivateMenuItem");
-        deactivateMenuItem.addEventListener("click", function () {
-            deactivateUserEvent();
+
+
+        var statusToggleMenuItem = document.getElementById("statusToggleMenuItem");
+        statusToggleMenuItem.addEventListener("click", function () {
+            statusToggleEvent();
         });
-        deactivateMenuItem.addEventListener("keydown", function (event) {
-            keyBoardEventHandler(event, deactivateUserEvent);
+        statusToggleMenuItem.addEventListener("keydown", function (event) {
+            keyBoardEventHandler(event, statusToggleEvent);
         });
-        
-        
-        var activateMenuItem = document.getElementById("activateMenuItem");
-        activateMenuItem.addEventListener("click", function () {
-            activateUserEvent();
-        });
-        activateMenuItem.addEventListener("keydown", function (event) {
-            keyBoardEventHandler(event, activateUserEvent);
-        });
-        
     };
 
     var editUserEvent = function () {
@@ -183,28 +173,20 @@ define("DomHandler", function (require, exports, module) {
         deleteUser(getUserFromContext());
     };
 
-    var deactivateUserEvent = function () {
+    var statusToggleEvent = function () {
         contextMenu.close();
 
-        if (!document.getElementById("deactivateMenuItem").classList.contains("inactive")) {
-            deactivateUser(getUserFromContext());
-        } else {
-            alert("User already inactive");
-        }
-    };
+        var statusToggleMenuItem = document.getElementById("statusToggleMenuItem");
 
-    var activateUserEvent = function () {
-        contextMenu.close();
-
-        if (!document.getElementById("activateMenuItem").classList.contains("inactive")) {
+        if (statusToggleMenuItem.getAttribute("data-action") === "activate") {
             activateUser(getUserFromContext());
         } else {
-            alert("User already active");
+            deactivateUser(getUserFromContext());
         }
     };
-    
+
     var keyBoardEventHandler = function (event, callBack) {
-        if(event.keyCode === 32 || event.keyCode === 13) {
+        if (event.keyCode === 32 || event.keyCode === 13) {
             event.preventDefault();
             event.stopPropagation();
             callBack();
@@ -373,22 +355,27 @@ define("DomHandler", function (require, exports, module) {
                     var fNameCell = row.insertCell(0);
                     fNameCell.className = "table-cell";
                     fNameCell.innerHTML = users[i].firstName;
+                    fNameCell.title = users[i].firstName;
 
                     var lNameCell = row.insertCell(1);
                     lNameCell.className = "table-cell";
                     lNameCell.innerHTML = users[i].lastName;
+                    lNameCell.title = users[i].lastName;
 
                     var emailCell = row.insertCell(2);
                     emailCell.className = "table-cell";
                     emailCell.innerHTML = users[i].email;
+                    emailCell.title = users[i].email;
 
                     var phnoCell = row.insertCell(3);
                     phnoCell.className = "table-cell";
                     phnoCell.innerHTML = users[i].phone;
+                    phnoCell.title = users[i].phone;
 
                     var statusCell = row.insertCell(4);
                     statusCell.className = "table-cell";
                     statusCell.innerHTML = users[i].status;
+                    statusCell.title = users[i].status;
 
                     if (users[i].status === "Inactive") {
                         row.className += " inactive";

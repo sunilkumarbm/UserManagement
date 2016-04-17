@@ -3,24 +3,19 @@ define("ContextMenu", function (require, exports, module) {
 
     var contextMenu = document.getElementById("contextMenu");
     var editMenu = document.getElementById("editMenuItem");
-    var activateMenu = document.getElementById("activateMenuItem");
-    var deactivateMenu = document.getElementById("deactivateMenuItem");
-    
+    var statusToggleMenuItem = document.getElementById("statusToggleMenuItem");
+//    var deactivateMenu = document.getElementById("deactivateMenuItem");
+
     var show = function (event, row) {
         contextMenu.setAttribute("data-userId", row.getAttribute("data-userId"));
-        
-        if(!row.classList.contains("inactive")) {
-            activateMenu.classList.add("inactive");
-            activateMenu.removeAttribute("tabindex");
-            
-            deactivateMenu.classList.remove("inactive");
-            deactivateMenu.setAttribute("tabindex", 3);
+
+
+        if (row.classList.contains("inactive")) {
+            statusToggleMenuItem.innerHTML = "Activate";
+            statusToggleMenuItem.setAttribute("data-action", "activate");
         } else {
-            activateMenu.classList.remove("inactive");
-            activateMenu.setAttribute("tabindex", 3);
-            
-            deactivateMenu.classList.add("inactive");
-            deactivateMenu.removeAttribute("tabindex");
+            statusToggleMenuItem.innerHTML = "Deactivate";
+            statusToggleMenuItem.setAttribute("data-action", "deactivate");
         }
         
         event.preventDefault();
@@ -28,7 +23,7 @@ define("ContextMenu", function (require, exports, module) {
         contextMenu.style.left = event.pageX + "px";
         contextMenu.style.display = "inline-block";
         contextMenu.setAttribute("aria-hidden", "false");
-        
+
         editMenu.focus();
     };
 
@@ -36,7 +31,7 @@ define("ContextMenu", function (require, exports, module) {
         contextMenu.style.display = "none";
         contextMenu.setAttribute("aria-hidden", "true");
     };
-    
+
     exports.show = show;
     exports.close = close;
 });

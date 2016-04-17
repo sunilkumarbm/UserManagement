@@ -1,8 +1,9 @@
 .table {
     width: 100%;
-    margin: 20px;
+    margin: 0 auto;
+    margin-top: 20px;
+    /*margin: 20px;*/
     text-align: left;
-    max-width: 1000px;
 
     &-row {
         border: 1px solid map-get($colors, "tableBorder");
@@ -19,7 +20,7 @@
         background-color: map-get($colors, "tableBodyBG");
         
         &:nth-child(even) {
-            background-color: darken(map-get($colors, "tableBodyBG"), 5%);;
+            background-color: darken(map-get($colors, "tableBodyBG"), 2%);
         }
         
         &:hover {
@@ -29,6 +30,7 @@
 
     &-cell {
         width: 20%;
+        max-width: 100px;
         padding: 10px;
         overflow: hidden;
         text-overflow: ellipsis;

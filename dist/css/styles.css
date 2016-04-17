@@ -18,7 +18,7 @@ html {
  */
 body {
   margin: 0;
-  background: #F7F7F7;
+  background: #FEFEFE;
 }
 
 /* HTML5 display definitions
@@ -565,9 +565,10 @@ input[type=number]::-webkit-outer-spin-button {
 
 .table {
   width: 100%;
-  margin: 20px;
+  margin: 0 auto;
+  margin-top: 20px;
+  /*margin: 20px;*/
   text-align: left;
-  max-width: 1000px;
 }
 
 .table-row {
@@ -576,25 +577,26 @@ input[type=number]::-webkit-outer-spin-button {
 
 .table-row-head {
   height: 50px;
-  background-color: #C0C0C0;
+  background-color: #DEDEDE;
   cursor: pointer;
 }
 
 .table-row-body {
   height: 30px;
-  background-color: #DCDCDC;
+  background-color: #FCFCFC;
 }
 
 .table-row-body:nth-child(even) {
-  background-color: #cfcfcf;
+  background-color: #f7f7f7;
 }
 
 .table-row-body:hover {
-  background-color: #c8c8c8;
+  background-color: #e8e8e8;
 }
 
 .table-cell {
   width: 20%;
+  max-width: 100px;
   padding: 10px;
   overflow: hidden;
   text-overflow: ellipsis;
