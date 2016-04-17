@@ -79,7 +79,23 @@ define("DomHandler", function (require, exports, module) {
         if (status.result === "error") {
 
         } else {
-            alert("HiHihaha");
+            var params = status.queryParams;
+
+            if (params.action === "save") {
+                var message;
+                var status;
+                if (params.result === "success") {
+                    message = "User saved successfully";
+                    status = "success";
+                } else {
+                    message = "Cannot save user data";
+                    status = "error";
+                }
+                Notifier.show(message, status);
+                setTimeout(function () {
+                    Notifier.hide();
+                }, 2000);
+            }
         }
     };
 
@@ -342,8 +358,16 @@ define("DomHandler", function (require, exports, module) {
         }
     };
 
-    var goToHomePage = function () {
-        redirector("index.html");
+    var goToHomePage = function (status) {
+        var homePage = "index.html";
+
+        if (status) {
+            homePage += "?action=save&result=success";
+        } else {
+            homePage += "?action=save&result=error";
+        }
+
+        redirector(homePage);
     };
 
     var editUserPage = function (userId) {

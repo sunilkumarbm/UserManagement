@@ -43,6 +43,8 @@ define("StorageOps", function (require, exports, module) {
         var userId = editedUser.id;
 
         var users = getAllUsers();
+        
+        var status = false;
 
         for (var i = 0; i < users.length; i++) {
             if (users[i].id === userId) {
@@ -51,11 +53,13 @@ define("StorageOps", function (require, exports, module) {
                 users[i].email = editedUser.email;
                 users[i].phone = editedUser.phone;
                 
+                status = true;
                 break;
             }
         }
         
         window.localStorage.setItem(database, JSON.stringify(users));
+        return status;
     };
 
     var getUser = function (userId) {
