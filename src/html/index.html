@@ -9,7 +9,7 @@
             <header>
                 <nav class="container">
                     <div class="menu-icon">
-                        <img class="menu-icon-img" alt="Menu Icon" src="assets/images/hamburger.png" />
+                        <img class="menu-icon-img" alt="Expand Menu Icon" src="assets/images/hamburger.png" />
                     </div>
                     <div class="menu-container">
                         <ul class="menu">
@@ -20,7 +20,7 @@
                 </nav>
             </header>
             <main class="container main-content">
-                <table class="table" id="usersTable">
+                <table class="table sortable" id="usersTable">
                     <thead class="table-head">
                         <tr class="table-row table-row-head">
                             <th class="table-cell">
@@ -51,19 +51,21 @@
         </div>
         <ul class="context-menu" id="contextMenu">
             <li class="context-menu-item">
-                <label data-id="view" id="editMenuItem">Edit</label>
+                <label tabindex="1" data-id="view" id="editMenuItem">Edit</label>
             </li>
             <li class="context-menu-item">
-                <label data-id="delete" id="deleteMenuItem">Remove</label>
+                <label tabindex="2" data-id="delete" id="deleteMenuItem">Remove</label>
             </li>
             <li class="context-menu-item">
-                <label data-id="deactivate" id="deactivateMenuItem">Deactivate</label>
+                <label tabindex="3" data-id="deactivate" id="deactivateMenuItem">Deactivate</label>
             </li>
             <li class="context-menu-item">
                 <label data-id="activate" id="activateMenuItem">Activate</label>
             </li>
         </ul>
         <script type="text/javascript" data-main="scripts/view" src="scripts/vendor/require.js">
+        </script>
+        <script type="text/javascript" src="scripts/vendor/sortable.js">
         </script>
     </body>
 </html>

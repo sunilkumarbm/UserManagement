@@ -32,37 +32,7 @@ define("DomHandler", function (require, exports, module) {
 
     var registerSaveEvents = function () {
         registerFormFieldEvents();
-        document.getElementById("save").addEventListener("click", function (event) {
-            event.preventDefault();
-            var firstName = document.getElementById("firstName").value;
-            var lastName = document.getElementById("lastName").value;
-            var email = document.getElementById("email").value;
-            var number = document.getElementById("number").value;
-
-            var status = UserManager.validateUser(firstName, lastName, email, number);
-
-            if (status.result === "success") {
-                var saveStatus;
-                if (this.getAttribute("data-action") === "create") {
-                    var newUser = new User.User(firstName, lastName, email, number, "Active");
-                    saveStatus = UserManager.createUser(newUser);
-                } else if (this.getAttribute("data-action") === "edit") {
-                    var userId = parseInt(this.getAttribute("data-userId"));
-
-                    var editedUser = new User.User(firstName, lastName, email, number, "Active", userId);
-                    saveStatus = UserManager.editUser(editedUser);
-                }
-
-                goToHomePage(saveStatus);
-            } else {
-                /* Invalid user details */
-                var invalidFields = status.fields;
-
-                for (var i = 0; i < invalidFields.length; i++) {
-                    showErrorField(invalidFields[i]);
-                }
-            }
-        });
+        document.getElementById("save").addEventListener("click", saveHandler);
 
         document.getElementById("cancel").addEventListener("click", function (event) {
             event.preventDefault();
@@ -71,6 +41,39 @@ define("DomHandler", function (require, exports, module) {
 
         checkEdit();
         document.getElementById("firstName").focus();
+    };
+
+    var saveHandler = function (event) {
+        event.preventDefault();
+        var firstName = document.getElementById("firstName").value;
+        var lastName = document.getElementById("lastName").value;
+        var email = document.getElementById("email").value;
+        var number = document.getElementById("number").value;
+
+        var status = UserManager.validateUser(firstName, lastName, email, number);
+
+        if (status.result === "success") {
+            var saveStatus;
+            if (this.getAttribute("data-action") === "create") {
+                var newUser = new User.User(firstName, lastName, email, number, "Active");
+                saveStatus = UserManager.createUser(newUser);
+            } else if (this.getAttribute("data-action") === "edit") {
+                var userId = parseInt(this.getAttribute("data-userId"));
+
+                var editedUser = new User.User(firstName, lastName, email, number, "Active", userId);
+                saveStatus = UserManager.editUser(editedUser);
+            }
+
+            goToHomePage(saveStatus);
+        } else {
+            /* Invalid user details */
+            var invalidFields = status.fields;
+
+            document.getElementById(invalidFields[0]).focus();
+            for (var i = 0; i < invalidFields.length; i++) {
+                showErrorField(invalidFields[i]);
+            }
+        }
     };
 
     var checkStatus = function () {
@@ -132,33 +135,80 @@ define("DomHandler", function (require, exports, module) {
     };
 
     var registerContextMenuEvents = function () {
-        document.getElementById("editMenuItem").addEventListener("click", function () {
-            contextMenu.close();
+        var editMenuItem = document.getElementById("editMenuItem");
+        editMenuItem.addEventListener("click", function () {
+            editUserEvent();
+        });
+        editMenuItem.addEventListener("keydown", function (event) {
+            keyBoardEventHandler(event, editUserEvent);
+        });
+        
+        
+        var deleteMenuItem = document.getElementById("deleteMenuItem");
+        deleteMenuItem.addEventListener("click", function () {
+            deleteUserEvent();
+        });
+        deleteMenuItem.addEventListener("keydown", function (event) {
+            keyBoardEventHandler(event, deleteUserEvent);
+        });
+        
+        
+        var deactivateMenuItem = document.getElementById("deactivateMenuItem");
+        deactivateMenuItem.addEventListener("click", function () {
+            deactivateUserEvent();
+        });
+        deactivateMenuItem.addEventListener("keydown", function (event) {
+            keyBoardEventHandler(event, deactivateUserEvent);
+        });
+        
+        
+        var activateMenuItem = document.getElementById("activateMenuItem");
+        activateMenuItem.addEventListener("click", function () {
+            activateUserEvent();
+        });
+        activateMenuItem.addEventListener("keydown", function (event) {
+            keyBoardEventHandler(event, activateUserEvent);
+        });
+        
+    };
 
-            editUserPage(getUserFromContext());
-        });
-        document.getElementById("deleteMenuItem").addEventListener("click", function () {
-            contextMenu.close();
-            deleteUser(getUserFromContext());
-        });
-        document.getElementById("deactivateMenuItem").addEventListener("click", function () {
-            contextMenu.close();
+    var editUserEvent = function () {
+        contextMenu.close();
 
-            if (!this.classList.contains("inactive")) {
-                deactivateUser(getUserFromContext());
-            } else {
-                alert("User already inactive");
-            }
-        });
-        document.getElementById("activateMenuItem").addEventListener("click", function () {
-            contextMenu.close();
+        editUserPage(getUserFromContext());
+    };
 
-            if (!this.classList.contains("inactive")) {
-                activateUser(getUserFromContext());
-            } else {
-                alert("User already active");
-            }
-        });
+    var deleteUserEvent = function () {
+        contextMenu.close();
+        deleteUser(getUserFromContext());
+    };
+
+    var deactivateUserEvent = function () {
+        contextMenu.close();
+
+        if (!document.getElementById("deactivateMenuItem").classList.contains("inactive")) {
+            deactivateUser(getUserFromContext());
+        } else {
+            alert("User already inactive");
+        }
+    };
+
+    var activateUserEvent = function () {
+        contextMenu.close();
+
+        if (!document.getElementById("activateMenuItem").classList.contains("inactive")) {
+            activateUser(getUserFromContext());
+        } else {
+            alert("User already active");
+        }
+    };
+    
+    var keyBoardEventHandler = function (event, callBack) {
+        if(event.keyCode === 32 || event.keyCode === 13) {
+            event.preventDefault();
+            event.stopPropagation();
+            callBack();
+        }
     };
 
     var registerFormFieldEvents = function () {

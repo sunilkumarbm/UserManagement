@@ -1,7 +1,7 @@
 define("StorageOps", function (require, exports, module) {
     "use strict";
 
-    var database = "users";
+    var database = "localUsersMgmt";
     var _lastUserId = "lastUserId";
 
     (function init() {

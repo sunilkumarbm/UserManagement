@@ -576,6 +576,7 @@ input[type=number]::-webkit-outer-spin-button {
 .table-row-head {
   height: 50px;
   background-color: #C0C0C0;
+  cursor: pointer;
 }
 
 .table-row-body {
@@ -593,6 +594,7 @@ input[type=number]::-webkit-outer-spin-button {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  text-align: left;
 }
 
 .context-menu {
@@ -617,6 +619,11 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .context-menu-item:hover {
+  background-color: #d7d7d7;
+  border: 1px solid #d1e2e0;
+}
+
+.context-menu-item:focus {
   background-color: #d7d7d7;
   border: 1px solid #d1e2e0;
 }

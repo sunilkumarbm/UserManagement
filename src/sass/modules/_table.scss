@@ -10,6 +10,7 @@
     &-row-head {
         height: 50px;
         background-color: map-get($colors, "tableHeadBG");
+        cursor: pointer;
     }
 
     &-row-body {
@@ -27,5 +28,6 @@
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
+        text-align: left;
     }
 }
