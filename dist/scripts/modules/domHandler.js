@@ -5,15 +5,29 @@ define("DomHandler", function (require, exports, module) {
     var UserManager = require('UserManager');
     var User = require('User');
     var QueryParser = require("QueryParser");
+    var NavbarHandler = require("NavbarHandler");
+    var Notifier = require("Notifier");
 
     var registerEventHandlers = function (pageType) {
+        registerMenuEvents();
         if (pageType === "view") {
             registerViewEvents();
             registerContextMenuEvents();
             registerContextMenuForTable();
+            checkStatus();
         } else if (pageType === "save") {
             registerSaveEvents();
         }
+    };
+
+    var registerMenuEvents = function () {
+        document.getElementsByClassName("menu-icon")[0].addEventListener("click", function () {
+            if (window.getComputedStyle(document.getElementsByClassName("menu-container")[0]).display === "none") {
+                NavbarHandler.show();
+            } else {
+                NavbarHandler.hide();
+            }
+        });
     };
 
     var registerSaveEvents = function () {
@@ -32,9 +46,9 @@ define("DomHandler", function (require, exports, module) {
                 if (this.getAttribute("data-action") === "create") {
                     var newUser = new User.User(firstName, lastName, email, number, "Active");
                     saveStatus = UserManager.createUser(newUser);
-                } else if (this.getAttribute("data-action") === "edit"){
+                } else if (this.getAttribute("data-action") === "edit") {
                     var userId = parseInt(this.getAttribute("data-userId"));
-                    
+
                     var editedUser = new User.User(firstName, lastName, email, number, "Active", userId);
                     saveStatus = UserManager.editUser(editedUser);
                 }
@@ -50,8 +64,23 @@ define("DomHandler", function (require, exports, module) {
             }
         });
 
+        document.getElementById("cancel").addEventListener("click", function (event) {
+            event.preventDefault();
+            window.location.href = "index.html";
+        });
+
         checkEdit();
         document.getElementById("firstName").focus();
+    };
+
+    var checkStatus = function () {
+        var status = QueryParser.getUrlParameters(window.location.href);
+
+        if (status.result === "error") {
+
+        } else {
+            alert("HiHihaha");
+        }
     };
 
     var checkEdit = function () {
@@ -142,14 +171,23 @@ define("DomHandler", function (require, exports, module) {
     };
 
     var deleteUser = function (userId) {
-        var status = UserManager.deleteUser(getUserFromContext());
-        if (status) {
-            var tableBody = getUsersTableBody();
+        var confirmation = confirm("Are you sure you want to delete the user?");
+        if (confirmation) {
+            var status = UserManager.deleteUser(getUserFromContext());
+            if (status) {
+                var tableBody = getUsersTableBody();
 
-            tableBody.removeChild(document.getElementById("userId_" + userId));
+                tableBody.removeChild(document.getElementById("userId_" + userId));
 
-            if (tableBody.getElementsByTagName("tr").length === 0) {
-                createNoUserRow(tableBody);
+                if (tableBody.getElementsByTagName("tr").length === 0) {
+                    createNoUserRow(tableBody);
+                }
+
+                Notifier.show("User deleted successfully", "success");
+
+                setTimeout(function () {
+                    Notifier.hide();
+                }, 2000);
             }
         }
     };
@@ -170,6 +208,12 @@ define("DomHandler", function (require, exports, module) {
             setUserStatus(userId, row, "Inactive");
 
             row.classList.add("inactive");
+
+            Notifier.show("User deactivated", "success");
+
+            setTimeout(function () {
+                Notifier.hide();
+            }, 2000);
         } else {
 
         }
@@ -184,6 +228,12 @@ define("DomHandler", function (require, exports, module) {
             setUserStatus(userId, row, "Active");
 
             row.classList.remove("inactive");
+
+            Notifier.show("User activated", "success");
+
+            setTimeout(function () {
+                Notifier.hide();
+            }, 2000);
         } else {
 
         }

@@ -8,7 +8,9 @@ require.config({
         NameValidator: "modules/NameValidator",
         NumberValidator: "modules/NumberValidator",
         EmailValidator: "modules/EmailValidator",
-        QueryParser: "modules/QueryParser"
+        QueryParser: "modules/QueryParser",
+        NavbarHandler: "modules/NavbarHandler",
+        Notifier: "modules/Notifier"
     }
 });
 
