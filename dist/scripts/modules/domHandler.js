@@ -61,7 +61,7 @@ define("DomHandler", function (require, exports, module) {
 
         document.getElementById("cancel").addEventListener("click", function (event) {
             event.preventDefault();
-            window.location.href = "index.html";
+            window.location.href = "users.html";
         });
 
         checkEdit();
@@ -526,7 +526,7 @@ define("DomHandler", function (require, exports, module) {
      * @param {string} status Status of save operation
      */
     var goToHomePage = function (status) {
-        var homePage = "index.html";
+        var homePage = "users.html";
 
         if (status) {
             homePage += "?action=save&result=success";

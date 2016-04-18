@@ -1,69 +1,32 @@
 <!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
 <html>
     <head>
-        <title>View Users</title>
-        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/styles.css" />
     </head>
     <body>
-        <section class="content">
-            <header>
-                <nav class="container">
-                    <div class="menu-icon">
-                        <img class="menu-icon-img" alt="Expand Menu Icon" src="assets/images/hamburger.png" />
-                    </div>
-                    <div class="menu-container">
-                        <ul class="menu">
-                            <li class="menu-item"><a class="active" href="index.html">Home</a></li>
-                            <li class="menu-item"><a href="save_user.html">Add User</a></li>
-                        </ul>
-                    </div>
-                </nav>
-            </header>
-            <main class="container main-content">
-                <table class="table sortable" id="usersTable">
-                    <caption>List of users</caption>
-                    <thead class="table-head">
-                        <tr class="table-row table-row-head">
-                            <th class="table-cell" scope="col">
-                                First Name
-                            </th>
-                            <th class="table-cell" scope="col">
-                                Last Name
-                            </th>
-                            <th class="table-cell" scope="col">
-                                Email
-                            </th>
-                            <th class="table-cell" scope="col">
-                                Mobile
-                            </th>
-                            <th class="table-cell" scope="col">
-                                Status
-                            </th>
+        <section  class="content">
+            <main>
+                <section class="landing">
+                    <h1>User Manager</h1>
+                    <table class="action-table">
+                        <tr>
+                            <td><a href="users.html">Users List</a></td>
+                            <td><a href="save_user.html">Add New User</a></td>
                         </tr>
-                    </thead>
-                    <tbody class="table-content">
-                    </tbody>
-                </table>
+                    </table>
+                </section>
             </main>
+            <footer class="footer">
+                User Manager © 2016
+            </footer>
         </section>
-        <div class="notify" aria-hidden="true">
-            <label id="notification" class="notify-message"></label>
-            <span class="notify-close" role="button">x</span>
-        </div>
-        <ul class="context-menu" id="contextMenu" role="menu" aria-hidden="true">
-            <li class="context-menu-item" role="menuitem">
-                <label aria-kbdshortcuts="V" tabindex="1" data-id="view" id="editMenuItem">Edit</label>
-            </li>
-            <li class="context-menu-item" role="menuitem">
-                <label aria-kbdshortcuts="D" tabindex="2" data-id="delete" id="deleteMenuItem">Remove</label>
-            </li>
-            <li class="context-menu-item" role="menuitem">
-                <label aria-kbdshortcuts="D" tabindex="3" id="statusToggleMenuItem">Deactivate</label>
-            </li>
-        </ul>
-        <script type="text/javascript" data-main="scripts/view" src="scripts/vendor/require.js">
-        </script>
-        <script type="text/javascript" src="scripts/vendor/sortable.js">
-        </script>
     </body>
 </html>

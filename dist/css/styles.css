@@ -416,6 +416,42 @@ body {
   left: 0;
 }
 
+.content .landing {
+  margin: 200px;
+}
+
+.content .landing h1 {
+  margin: 0 auto auto;
+  text-align: center;
+  font-weight: 450;
+}
+
+.content .action-table {
+  margin: 100px auto;
+}
+
+.content .action-table td {
+  border: 1px solid black;
+  /*padding: 20px;*/
+  text-align: center;
+  height: 100px;
+  width: 200px;
+}
+
+.content .action-table td a {
+  text-decoration: none;
+}
+
+.content .footer {
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 20px;
+  background-color: #DEDEDE;
+}
+
 .content .container {
   width: 80%;
   height: 100%;
