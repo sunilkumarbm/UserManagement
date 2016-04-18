@@ -144,8 +144,7 @@ define("DomHandler", function (require, exports, module) {
         var status = QueryParser.getUrlParameters(window.location.href);
 
         if (status.result === "error") {
-//            alert("User not specified");
-//            window.location.href = "index.html";
+
         } else {
             var params = status.queryParams;
 
