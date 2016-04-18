@@ -1,6 +1,17 @@
 define("DomHandler", function (require, exports, module) {
     "use strict";
 
+    /**
+     * Handles dom manipulations for all the pages
+     * @module modules/domHandler
+     * @name DOMHandler
+     * @requires ContextMenu
+     * @requires UserManager
+     * @requires User
+     * @requires QueryParser
+     * @requires NavbarHandler
+     * @requires Notifier
+     */
     var contextMenu = require('ContextMenu');
     var UserManager = require('UserManager');
     var User = require('User');
@@ -8,6 +19,12 @@ define("DomHandler", function (require, exports, module) {
     var NavbarHandler = require("NavbarHandler");
     var Notifier = require("Notifier");
 
+
+    /**
+     * @function registerEventHandlers
+     * @description Registers all DOM events
+     * @param {string} pageType - Type of page (View/Save)
+     */
     var registerEventHandlers = function (pageType) {
         registerMenuEvents();
         if (pageType === "view") {
@@ -20,6 +37,10 @@ define("DomHandler", function (require, exports, module) {
         }
     };
 
+    /**
+     * @function registerEventHandlers
+     * @description Registers all navbar events
+     */
     var registerMenuEvents = function () {
         document.getElementsByClassName("menu-icon")[0].addEventListener("click", function () {
             if (window.getComputedStyle(document.getElementsByClassName("menu-container")[0]).display === "none") {
@@ -30,6 +51,10 @@ define("DomHandler", function (require, exports, module) {
         });
     };
 
+    /**
+     * @function registerSaveEvents
+     * @description Registers all save page events
+     */
     var registerSaveEvents = function () {
         registerFormFieldEvents();
         document.getElementById("save").addEventListener("click", saveHandler);
@@ -43,6 +68,11 @@ define("DomHandler", function (require, exports, module) {
         document.getElementById("firstName").focus();
     };
 
+    /**
+     * @function saveHandler
+     * @description Save button actions
+     * @param {object} event Submit event
+     */
     var saveHandler = function (event) {
         event.preventDefault();
         var firstName = document.getElementById("firstName").value;
@@ -76,6 +106,10 @@ define("DomHandler", function (require, exports, module) {
         }
     };
 
+    /**
+     * @function checkStatus
+     * @description Check save user status and display appropriate notification
+     */
     var checkStatus = function () {
         var status = QueryParser.getUrlParameters(window.location.href);
 
@@ -102,6 +136,10 @@ define("DomHandler", function (require, exports, module) {
         }
     };
 
+    /**
+     * @function checkEdit
+     * @description Check if save page status is create user or edit user
+     */
     var checkEdit = function () {
         var status = QueryParser.getUrlParameters(window.location.href);
 
@@ -134,6 +172,10 @@ define("DomHandler", function (require, exports, module) {
         }
     };
 
+    /**
+     * @function registerContextMenuEvents
+     * @description Register click events for all context menu items
+     */
     var registerContextMenuEvents = function () {
         var editMenuItem = document.getElementById("editMenuItem");
         editMenuItem.addEventListener("click", function () {
@@ -162,17 +204,29 @@ define("DomHandler", function (require, exports, module) {
         });
     };
 
+    /**
+     * @function editUserEvent
+     * @description Edit user event handler
+     */
     var editUserEvent = function () {
         contextMenu.close();
 
         editUserPage(getUserFromContext());
     };
 
+    /**
+     * @function deleteUserEvent
+     * @description Delete user event handler
+     */
     var deleteUserEvent = function () {
         contextMenu.close();
         deleteUser(getUserFromContext());
     };
 
+    /**
+     * @function statusToggleEvent
+     * @description Activate/Deactivate event handler
+     */
     var statusToggleEvent = function () {
         contextMenu.close();
 
@@ -185,6 +239,12 @@ define("DomHandler", function (require, exports, module) {
         }
     };
 
+    /**
+     * @function keyBoardEventHandler
+     * @description Context menu key event handler
+     * @param {object} event Keyboard event
+     * @param {function} callBack Event handler call back function
+     */
     var keyBoardEventHandler = function (event, callBack) {
         if (event.keyCode === 32 || event.keyCode === 13) {
             event.preventDefault();
@@ -193,6 +253,10 @@ define("DomHandler", function (require, exports, module) {
         }
     };
 
+    /**
+     * @function registerFormFieldEvents
+     * @description Register form field events (Show error message underneath the field)
+     */
     var registerFormFieldEvents = function () {
         var formFields = document.getElementsByClassName("form-field");
 
@@ -203,21 +267,41 @@ define("DomHandler", function (require, exports, module) {
         }
     };
 
+    /**
+     * @function showErrorField
+     * @description Marks fields with errors
+     * @param {string} fieldId ID of the form field
+     */
     var showErrorField = function (fieldId) {
         document.getElementById(fieldId).classList.add("invalid-field");
         document.getElementById(fieldId + "Error").style.display = "block";
     };
 
+    /**
+     * @function hideErrorField
+     * @description Removes error notification from the form field
+     * @param {string} fieldId ID of the form field
+     */
     var hideErrorField = function (fieldId) {
         document.getElementById(fieldId).classList.remove("invalid-field");
         document.getElementById(fieldId + "Error").style.display = "none";
     };
 
+    /**
+     * @function getUserFromContext
+     * @description Gets the user id from the context menu
+     */
     var getUserFromContext = function () {
         var userId = parseInt(document.getElementById("contextMenu").getAttribute("data-userId"));
         return userId;
     };
 
+
+    /**
+     * @function deleteUser
+     * @description Delete user from database
+     * @param {Number} userId User id of the user to be deleted
+     */
     var deleteUser = function (userId) {
         var confirmation = confirm("Are you sure you want to delete the user?");
         if (confirmation) {
@@ -247,6 +331,11 @@ define("DomHandler", function (require, exports, module) {
         return tableBody;
     };
 
+    /**
+     * @function deactivateUser
+     * @description Deactivate user
+     * @param {Number} userId User id of the user to be deactivated
+     */
     var deactivateUser = function (userId) {
         var status = UserManager.deactivateUser(userId);
 
@@ -267,6 +356,11 @@ define("DomHandler", function (require, exports, module) {
         }
     };
 
+    /**
+     * @function activateUser
+     * @description Activate user
+     * @param {Number} userId User id of the user to be activated
+     */
     var activateUser = function (userId) {
         var status = UserManager.activateUser(userId);
 
@@ -287,10 +381,21 @@ define("DomHandler", function (require, exports, module) {
         }
     };
 
+    /**
+     * @function setUserStatus
+     * @description Set user status to active/inactive in the table
+     * @param {Number} userId User id of the user
+     * @param {HTMLTableRowElement} row Table row
+     * @param {string} status Status string (Active/In active)
+     */
     var setUserStatus = function (userId, row, status) {
         row.cells[4].innerHTML = status;
     };
 
+    /**
+     * @function registerViewEvents
+     * @description Register dom events in view page
+     */
     var registerViewEvents = function () {
         window.addEventListener("keydown", function (event) {
             keyPressed(event);
@@ -301,6 +406,10 @@ define("DomHandler", function (require, exports, module) {
         });
     };
 
+    /**
+     * @function registerContextMenuForTable
+     * @description Register dom events for table context menu
+     */
     var registerContextMenuForTable = function () {
         var tableRows = document.getElementsByClassName("table-row-body");
 
@@ -309,6 +418,11 @@ define("DomHandler", function (require, exports, module) {
         }
     };
 
+    /**
+     * @function keyPressed
+     * @description Hotkey events for context menu
+     * @param {object} event Keyboard event
+     */
     var keyPressed = function (event) {
         if (!event.ctrlKey && !event.shiftKey && !event.altKey) {
             if (event.keyCode === 27) {
@@ -330,6 +444,12 @@ define("DomHandler", function (require, exports, module) {
         }
     };
 
+
+    /**
+     * @function createNoUserRow
+     * @description Inserts no user found row when there are no users in the database
+     * @param {HTMLTableBodyElement} tableBody Table body
+     */
     var createNoUserRow = function (tableBody) {
         var noUserRow = tableBody.insertRow(0);
         noUserRow.className = "table-row table-row-body";
@@ -340,6 +460,11 @@ define("DomHandler", function (require, exports, module) {
         cell.innerHTML = "No users found. <a href=\"save_user.html\">Click Here</a> to add.";
     };
 
+    /**
+     * @function showUsers
+     * @description Displays all the users in the table
+     * @param {object[]} users List of users
+     */
     var showUsers = function (users) {
         var tableBody = getUsersTableBody();
         if (users === null || users === undefined || users.length === 0) {
@@ -395,6 +520,11 @@ define("DomHandler", function (require, exports, module) {
         }
     };
 
+    /**
+     * @function goToHomePage
+     * @description Redirect to home page
+     * @param {string} status Status of save operation
+     */
     var goToHomePage = function (status) {
         var homePage = "index.html";
 
@@ -407,14 +537,29 @@ define("DomHandler", function (require, exports, module) {
         redirector(homePage);
     };
 
+    /**
+     * @function editUserPage
+     * @description Redirect to edit user page
+     * @param {Number} userId User ID of the user to be edited
+     */
     var editUserPage = function (userId) {
         redirector("save_user.html?userId=" + userId);
     };
 
+    /**
+     * @function redirector
+     * @description Redirects to specified url
+     * @param {string} url URL to which the browser has to be redirected
+     */
     var redirector = function (url) {
         window.location.href = url;
     };
 
+    /**
+     * @function registerContextMenuEventToRow
+     * @description Regiser context menu event for table rows
+     * @param {HTMLTableRowElement} row Row to which context menu event has to be bound
+     */
     var registerContextMenuEventToRow = function (row) {
         row.addEventListener("contextmenu", function (event) {
             contextMenu.show(event, row);

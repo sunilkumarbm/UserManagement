@@ -10,7 +10,9 @@
   "license": "ISC",
   "devDependencies": {
     "bower": "^1.7.9",
-    "gulp": "^3.9.0"
+    "gulp": "^3.9.0",
+    "gulp-jsdoc3": "^0.2.1",
+    "jsdoc": "^3.4.0"
   },
   "dependencies": {
     "bower": "^1.7.9",

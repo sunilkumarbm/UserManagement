@@ -15,6 +15,14 @@ require.config({
 });
 
 require(["DomHandler", "UserManager"], function (DomHandler, UserManager) {
+    /**
+     * Operations related to View uses page
+     * @module +view
+     * @name View
+     * @requires DomHandler
+     * @requires UserManager
+     */
+    
     DomHandler.registerEventHandlers("view");
     
     var users = UserManager.getAllUsers();

@@ -1,5 +1,11 @@
 define(function (require, exports, module) {
     "use strict";
+    
+    /**
+     * Navbar controller
+     * @module modules/Notifier
+     * @name Notifier
+     */
     var notificationBar = document.getElementsByClassName("notify")[0];
     var notificationLabel = document.getElementById("notification");
 
@@ -7,7 +13,12 @@ define(function (require, exports, module) {
     var MESSAGE_TYPE_FAILURE = "failure";
 
 
-    (function () {
+    (
+        /**
+          * @function init
+          * @description Notifier module initialization
+         */
+        function init() {
         var notifyClose = document.getElementsByClassName("notify-close");
 
         for (var i = 0; i < notifyClose.length; i++) {
@@ -17,6 +28,13 @@ define(function (require, exports, module) {
         }
     })();
 
+
+    /**
+     * @function show
+     * @description Displays notification
+     * @param {string} message Message to display in the notification
+     * @param {string} type Type of message (success/error)
+     */
     var show = function (message, type) {
         notificationLabel.innerHTML = message;
 
@@ -30,6 +48,10 @@ define(function (require, exports, module) {
         }
     };
 
+    /**
+     * @function hide
+     * @description Hides notification
+     */
     var hide = function () {
         notificationBar.style.display = "none";
         notificationBar.setAttribute("aria-hidden", "true");
